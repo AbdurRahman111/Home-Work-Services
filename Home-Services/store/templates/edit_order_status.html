@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load cart %}
+
+{% load custom_filter %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/orders.css' %}">
+</head>
+
+  <!-- <body style="background-color:PowderBlue;">  class="border rounded p-4 m-4" class="display-4 pl-4 ml-4"  -->
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+          <h1 class="display-4 text-center">Order Details</h1><hr><hr>
+
+          <div class="row">
+            <div class="col-md-5 border border-success container pb-4 pl-5">
+                <form method="POST">{% csrf_token %}
+               <br>
+               <h2>Accept This Order</h2>
+
+               {{form.as_p}}
+
+               <button class="btn btn-success btn-sm" type="submit">Apply</button>
+    <!--           <a class="btn btn-warning btn-sm" href="{% url 'cancel_order' abc %}" type="submit">Cancel This Order</a>-->
+           </form>
+
+            </div>
+            <div class="col-md-5 border border-danger container pb-4 pl-5" >
+
+                <form action="{% url 'cancel_order' abc %}" method="POST">{% csrf_token %}
+               <br>
+               <h2 style="color:red;">Cancel This Order</h2>
+               {{form1.as_p}}
+
+               <button class="btn btn-info btn-sm" type="submit">Apply</button>
+    <!--           <a class="btn btn-warning btn-sm" href="{% url 'cancel_order' abc %}" type="submit">Cancel This Order</a>-->
+           </form>
+
+            </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}

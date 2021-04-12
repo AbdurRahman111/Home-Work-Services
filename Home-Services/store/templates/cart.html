@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load cart %}
+
+{% load custom_filter %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+</head>
+
+  <!-- <body style="background-color:Aquamarine;">  <div class="border rounded p-4 m-4" id="bord"> class="display-4 pl-4 ml-4"-->
+
+<div class="container">
+   
+       <center> <p  id="head" >Your Appointment</p></center>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Appointment id</th>
+                    <th>Customer Name</th>
+                    <th>Customer phone number</th>
+
+                    <th>Image</th>
+                    <th>Service required</th>
+
+                    <th>Service provider name</th>
+                    <th>Booking date and time</th>
+                    <th>Price</th>
+                    <th>Completion time</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for product in products %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{request.session.customer_first_name}} {{request.session.customer_last_name}}</td>
+                    <td>{{request.session.customer_phone}}</td>
+
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                    <td>{{product.service_provider.service_type}}</td>
+
+                    <td>{{product.service_provider.first_name}} {{product.service_provider.last_name}}</td>
+                    <td>{{date_time}}</td>
+                    <td>{{product.price|currency}}</td>
+                    <td>{{ product.complition_time }} {% if product.complition_time == 1 %} day {% else %} days {% endif %}</td>
+                    <td>{{product|cart_quantity:request.session.cart}}</td>
+                    <td>{{product|price_total:request.session.cart|currency}}</td>
+                </tr>
+
+                {% endfor %}
+               
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="9"></th>
+                    <th class="" colspan="">Total</th>
+                    <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="m-3 p-3">
+            <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-info border rounded  col-lg-3 float-right" id="bttn">Check out</a>
+        </div>
+   </div>
+</div>
+
+
+<!-- modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+              Check Out Form
+          </h5>
+          <hr>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="m-2 p-3">
+            <form action="/check-out" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="">Service date</label>
+                  <input type="date" name="order_date" id="" class="form-control" placeholder="" aria-describedby="helpId" required>
+                  
+                </div>
+                <label for="">Time slots</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="9-12 Am" name="radio_btn" id="flexRadioDefault1" required>
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    9-12 Am
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="12-3 Pm" name="radio_btn" id="flexRadioDefault2" required>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    12-3 Pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="3-6 Pm" name="radio_btn" id="flexRadioDefault3" required>
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    3-6 Pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="6-9 Pm" name="radio_btn" id="flexRadioDefault4" required>
+                  <label class="form-check-label" for="flexRadioDefault4">
+                    6-9 Pm
+                  </label>
+                </div>
+
+
+
+                  <input type="submit" class="btn float-right btn-outline-info col-lg-6" value="Check out">
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

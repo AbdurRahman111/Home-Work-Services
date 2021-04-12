@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signuser.css' %}">
+</head>
+   <center><div class="display-8">New User Registration Form</div></center>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <br>
+            <br>
+            <br>
+        <form action="/signup" method="POST">
+        {% csrf_token %}
+
+        {% if error%}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endif %}
+        <!-- firstname -->
+        <div class="form-group">
+            <label for="">First Name</label>
+            <input type="text" name="firstname" id="" value="{{values.first_name}}"
+                   class="form-control form-control-sm" placeholder="">
+        </div>
+
+        <!-- last name -->
+        <div class="form-group">
+            <label for="">Last Name</label>
+            <input type="text" name="lastname" id="" value="{{values.last_name}}"
+                   class="form-control form-control-sm" >
+        </div>
+
+        <!-- phone -->
+        <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" name="phone" id="" class="form-control form-control-sm"
+            value="{{values.phone}}" placeholder="9632147852">
+        </div>
+
+        <!-- email -->
+        <div class="form-group">
+            <label for="">Email</label>
+            <input required type="email" name="email" id="" value="{{values.email}}"
+            class=" form-control-sm form-control" placeholder="example@gmail.com">
+        </div>
+
+
+        <!-- password -->
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" name="password" id=""
+             class="form-control form-control-sm" placeholder="********">
+        </div>
+
+        <!-- aadhar -->
+        <div class="form-group">
+            <label for="">Aadhar</label>
+            <input type="text" name="aadhar" id=""
+                   class="form-control form-control-sm" placeholder="123456789" required>
+        </div>
+
+        <!-- address -->
+        <div class="form-group">
+            <label for="">Address</label>
+            <input type="text" name="address" id=""
+             class="form-control form-control-sm" placeholder="M G Road" required>
+        </div>
+
+        <!-- area -->
+        <div class="form-group">
+            <label for="">Area</label>
+            <input type="text" name="area" id=""
+             class="form-control form-control-sm" placeholder="Near Church Street" required>
+        </div>
+
+        <!-- landmark -->
+        <div class="form-group">
+            <label for="">Landmark</label>
+            <input type="text" name="landmark" id=""
+             class="form-control form-control-sm" placeholder="opp metro station" required>
+        </div>
+        <div class="form-group">
+            <label for="">Pin Code</label>
+            <input type="text" name="pincode" id=""
+            class="form-control form-control-sm" placeholder="560069" required>
+        </div>
+        <hr>
+        <div class="form-group">
+            <center><input class="btn btn-sm btn-info" type="submit" value="Create An Account "></center><br>
+
+        </div>
+        <div>
+            <h5>Already Have An Account? <a href="login"><u>Click Here</u></a></h5>
+        </div>
+
+    </form>
+    </div>
+    </div>
+</div>
+<br>
+</body>
+
+{% endblock %}

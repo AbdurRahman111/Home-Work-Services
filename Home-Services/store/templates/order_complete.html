@@ -1,0 +1,108 @@
+
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load cart %}
+
+{% load custom_filter %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/orders.css' %}">
+</head>
+
+  <!-- <body style="background-color:PowderBlue;">  class="border rounded p-4 m-4" class="display-4 pl-4 ml-4"  -->
+
+<ul class="list-group container mt-5 col-sm-5">
+  <li class="list-group-item container">
+
+      <form class="container mt-4" method="POST" action="{% url 'Feedback' %}">{% csrf_token %}
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Appointment id</label>
+            <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{get_order_by_id.id}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Service provider name </label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{get_order_by_id.service_provider.first_name}} {{get_order_by_id.service_provider.last_name}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Customer name</label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{get_order_by_id.customer.first_name}} {{get_order_by_id.customer.last_name}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Address</label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{get_order_by_id.customer.address}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Booking date</label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{get_order_by_id.date}}</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Completion date</label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <input name="completion_date" type="date" class="form-control" required>
+
+              <input name="Appointment_id" type="hidden" value="{{get_order_by_id.id}}" class="form-control">
+              <input name="Service_provider_id" type="hidden" value="{{get_order_by_id.service_provider.id}}" class="form-control">
+              <input name="Customer_id" type="hidden" value="{{get_order_by_id.customer.id}}" class="form-control">
+              <input name="address" type="hidden" value="{{get_order_by_id.customer.address}}" class="form-control">
+              <input name="Booking_date" type="hidden" value="{{get_order_by_id.date}}" class="form-control">
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Total cost</label>
+              <label class="col-sm-2 col-form-label">:</label>
+            <div class="col-sm-5">
+              <input type="text" name="total_cost" class="form-control" placeholder="Total cost" required>
+            </div>
+          </div>
+
+          {{form2.as_p}}
+
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"></label>
+              <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-5">
+              <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
+          </div>
+
+
+        </form>
+
+  </li>
+
+</ul>
+
+
+
+
+
+{% endblock %}

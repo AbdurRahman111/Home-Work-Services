@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load cart %}
+
+{% load custom_filter %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/orders.css' %}">
+</head>
+   
+  <!-- <body style="background-color:PowderBlue;">  class="border rounded p-4 m-4" class="display-4 pl-4 ml-4"  -->
+
+<div >
+   <div class="container">
+
+        {% if request.session.customer != 'service_provider' %}
+
+        <center><p id="head" >Your Bookings</p></center>
+        <hr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Appointment id</th>
+                    <th>Image</th>
+
+                    <th>Customer phone</th>
+                    <th>Service required</th>
+
+                    <th>Service Provider</th>
+                    <th>Booking Date</th>
+                    <th>Service Date</th>
+                    <th>Time slot</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.id}}</td>
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{order.product.image.url}}" alt=""></td>
+
+
+                    <td>{{order.customer.phone }}</td>
+                    <td>{{order.service_provider.service_type }}</td>
+
+                    <td>{{order.service_provider.first_name}} {{order.service_provider.last_name}}</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.Service_date}}</td>
+                    <td>{{order.Time_slots}}</td>
+                    <td>{{order.price|currency}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.quantity|multiply:order.price|currency}}</td>
+
+                    {% if order.Complete_this_order %}
+                    <td><small class="badge badge-success">Complete</small></td>
+                    {% else %}
+
+                        {% if order.Cancel_this_order %}
+                        <td><small class="badge badge-danger">Canceled</small></td>
+
+                        {% else %}
+
+                            {% if order.Accept_this_order %}
+                            <td><small class="badge badge-info">Assigned</small></td>
+                            {%else%}
+                            <td><small class="badge badge-warning">Pending</small></td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                </tr>
+
+                {% endfor %}
+               
+            </tbody>
+
+        </table>
+        {% elif request.session.customer == 'service_provider' %}
+
+        <center><p id="head" >Your Orders</p></center>
+        <hr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Appointment id</th>
+
+                    <th>Customer name</th>
+                    <th>Customer Phone no.</th>
+                    <th>Address</th>
+                    <th>date of booking!</th>
+                    <th>Service Date</th>
+                    <th>Time slot</th>
+
+                    <th>Status</th>
+<!--                    <th>End Date</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for order in orders %}
+
+                <tr>
+
+                    <td>{{order.id}}</td>
+
+                    <td>{{order.customer.first_name}} {{order.customer.last_name}}</td>
+                    <td>{{order.customer.phone }}</td>
+                    <td>{{order.customer.address }}</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.Service_date}}</td>
+                    <td>{{order.Time_slots}}
+
+                    </td>
+
+                    {% if order.Complete_this_order %}
+                    <td><small class="badge badge-success">Complete</small></td>
+                    {% else %}
+
+                        {% if order.Cancel_this_order %}
+                        <td><small class="badge badge-danger">Canceled</small></td>
+
+                        {% else %}
+                            {% if order.Accept_this_order %}
+                            <td><small class="badge badge-info">Assigned</small><a href="{% url 'order_complete' order.id %}"><small><b>Completed</b></small></a></td>
+                            {%else%}
+                            <td><small class="badge badge-warning">Pending</small> <a href="{% url 'edit_order' order.id %}">Edit</a></td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+<!--                    <td>{{order.status}}</td>-->
+<!--                    <td>{{order.complition_date}}</td>-->
+                    
+                </tr>
+
+
+                {% endfor %}
+               
+            </tbody>
+
+        </table>
+
+
+        {% endif %}
+   </div>
+</div>
+
+
+
+
+{% endblock %}

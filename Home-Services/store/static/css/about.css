@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.about{
+	font-size: 28px;
+	font-weight: bold;
+	color: #262626;
+	padding: 10px 0 15px 25px;
+	background: #adadad;
+ 	border-bottom: 1px solid #370e3f;
+ 	border-radius: 5px 5px 0 0;
+ 	font-family: 'Rubik',serif;
+}
+
+h4{
+	font-family: 'Rubik',serif;
+	color: #262626;
+	padding: 10px 0 15px 25px;
+	background: #4d4d4d;
+	color: white;
+	border: 1px solid black;
+}
+
+textarea{
+	resize: none;
+}
+
+p{
+	text-indent: 50px;
+	text-align: justify;
+	letter-spacing: 1px;
+	padding: 5px;
+}
+
+img{
+	float: left;
+	width: 260px;
+	height: 250px;
+	background-size: cover;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 5px 15px 20px;
+}
+
+form {
+    margin-left: 25%;
+    margin-right: 70%;
+    width: 50%;
+    background-color: white;
+    box-sizing: border-box;
+	border: 1px solid #6d1c7d;
+ 	border-radius: 10px 10px 10px 10px;
+ 	padding: 10px;
+}

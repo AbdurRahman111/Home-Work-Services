@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body{
+	font-family: 'Poppins',serif;
+}
+
+nav{
+    background-color: white;
+}
+    
+.one-edge-shadow {
+    box-shadow: 0 8px 2px -5px rgb(246, 245, 245);
+}
+
+.display-8{
+  font-weight: 200;
+  font-size: 30px;
+}
+
+@media all and (min-width: 992px) {
+	.navbar .nav-item .dropdown-menu{ display: none; }
+	.navbar .nav-item:hover .nav-link{ color: #fff;  }
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+}
+
+#nava{
+	font-family: 'Lora',serif;
+	font-weight: bold;
+}

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/feedback.css' %}">
+</head>
+   <center><div class="display-8">Work Feedbacks</div></center>
+<body>
+<div>
+    <div class="row">
+        <div class="col-sm-8 container">
+            <br>
+            <br>
+            <br>
+<!--        <form action="/feedback" method="POST">-->
+<!--        {% csrf_token %}-->
+
+<!--        {% if error%}-->
+<!--        <div class="alert alert-danger" role="alert">-->
+<!--            {{error}}-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--        &lt;!&ndash; firstname &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="">Name</label>-->
+<!--            <input type="text" name="serv_name" id=""-->
+<!--                   class="form-control form-control-sm" placeholder="" required>-->
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash; phone &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="">Phone</label>-->
+<!--            <input type="text" name="phone" id="" class="form-control form-control-sm"-->
+<!--             placeholder="9632147852" required>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; email &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="">Email</label>-->
+<!--            <input required type="email" name="email" id=""-->
+<!--            class=" form-control-sm form-control" placeholder="example@gmail.com" required>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="">Customer Name</label>-->
+<!--            <input type="text" name="cust_name" id=""-->
+<!--                   class="form-control form-control-sm" placeholder="" required>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; address &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="">Address</label>-->
+<!--            <input type="text" name="address" id=""-->
+<!--             class="form-control form-control-sm" placeholder="place of work" required>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; area &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="">Area</label>-->
+<!--            <input type="text" name="area" id=""-->
+<!--             class="form-control form-control-sm" placeholder="Shanti Nagar" required>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="">Pin Code</label>-->
+<!--            <input type="text" name="pincode" id=""-->
+<!--            class="form-control form-control-sm" placeholder="560069" required>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="">Work Status</label>-->
+<!--            <input type="text" name="workstatus" id=""-->
+<!--            class="form-control form-control-sm" placeholder="work done/extra cost/cancel etc..." required>-->
+<!--        </div>-->
+
+
+<!--        <hr>-->
+<!--        <div class="form-group">-->
+<!--            <center><input class="btn btn-sm btn-info" type="submit" value="submit feedback"></center><br>-->
+<!--            {% if messages %}-->
+<!--            {% for message in messages %}-->
+<!--            <h2>{{message}}</h2>-->
+<!--            {% endfor%}-->
+<!--            {% endif %}-->
+
+<!--    </form>-->
+
+
+<ul class="list-group">
+  <li class="list-group-item">
+
+      <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Appointment id</th>
+          <th scope="col">Service provider name</th>
+          <th scope="col">Customer name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Booking date</th>
+          <th scope="col">Completion date</th>
+          <th scope="col">Total cost</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in filter_fb %}
+          {% if i.Review_Admin %}
+            <tr>
+    <!--          <th scope="row">{{filter_fb.Appointment_id}}</th>-->
+              <td>{{i.Appointment_id}}</td>
+              <td>{{i.Service_provider_name.first_name}} {{i.Service_provider_name.last_name}}</td>
+              <td>{{i.Customer_name.first_name}} {{i.Customer_name.last_name}} </td>
+              <td>{{i.address}}</td>
+              <td>{{i.Booking_date}}</td>
+              <td>{{i.Completion_date}}</td>
+              <td>{{i.Total_cost}}</td>
+            </tr>
+          {% endif %}
+      {% endfor %}
+
+      </tbody>
+    </table>
+
+  </li>
+
+</ul>
+
+
+
+
+        </div>
+    </div>
+</div>
+<br>
+</body>
+
+{% endblock %}
